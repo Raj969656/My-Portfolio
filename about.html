@@ -1,65 +1,129 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="transition-colors duration-300">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .popup-hidden {
-            transform: scale(0);
-            opacity: 0;
-            transition: all 0.3s ease-in-out;
-        }
-        .popup-visible {
-            transform: scale(1);
-            opacity: 1;
-            transition: all 0.3s ease-in-out;
-        }
-    </style>
-</head>
-<body class="bg-slate-500 font-sans">
-    <div class="min-h-screen flex flex-col items-center justify-center">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full text-center">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">About Me</h1>
-            <p class="text-gray-600 mb-6">
-                Welcome to my Portfolio website! I am a passionate B tech student dedicated to creating innovative solutions and sharing knowledge with the world. My mission is to inspire and empower through creativity and technology.
-            </p>
-            <button id="popup"  class="bg-[#4595eb] py-2 px-5 rounded font-extrabold bg-gradient-to-l from-[#1595b6] to-[#1f2667e6] relative hover:scale-110 ease-in-out duration-100 group">
-                About
-            </button>
-        </div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me - CS Student</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Enable dark mode using class strategy
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
 
-        <!-- Popup -->
-        <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 popup-hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4"> About Me</h2>
-                <p class="text-gray-600 mb-6">
-                   Final Year B.Tech student specializing in Computer Science. Passionate about Web Development & software development & machine learning..
-                   <img src="ProfilePic.jg\pg" alt="My Image" srcset="">
-                </p>
-                <button id="closePopup" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
-                    Close
-                </button>
-            </div>
-        </div>
+ <script>
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      html.classList.toggle('dark');
+
+      const btn = document.getElementById('darkModeToggle');
+      const span = btn.querySelector('span');
+
+      if (html.classList.contains('dark')) {
+        btn.innerHTML = '☀️ <span>Light Mode</span>';
+      } else {
+        btn.innerHTML = '🌙 <span>Dark Mode</span>';
+      }
+    }
+  </script>
+
+
+
+</head>
+<body class="bg-slate-400 text-black transition-colors duration-300 dark:bg-gray-900 dark:text-white">
+<div class="flex justify-end p-6" style="text-align: right;">
+        <button  id="darkModeToggle"
+      class="flex items-center gap-2 bg-gray-800 text-white dark:bg-yellow-400 dark:text-black px-4 py-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300"
+      onclick="toggleDarkMode()">
+           Dark Mode
+        </button>
+
+</div>
+  <!-- Main Container -->
+  <div class=" max-w-4xl mx-auto p-6 mt-10 bg-slate-100 dark:bg-gray-800 shadow-lg rounded-lg">
+
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center">
+      <img aria-placeholder="bg7.jpg"
+        src="./assets/images/bg7.jpg"
+        alt="" 
+        class="w-32 h-32 rounded-full border-4 border-blue-500"
+      />
+      <h1 class="text-3xl font-bold mt-4">Raj Yadav</h1>
+      <p class="text-blue-600 dark:text-blue-400">Computer Science Engineering Student</p>
+
+      <!-- Buttons -->
+      <div class="mt-4 flex gap-4">
+        <!-- Dark Mode Toggle -->
+       
+        <!-- Download CV -->
+        <a 
+          href="./assets/images/Rresume.pdf" 
+          download 
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:scale-105 active:scale-95 transition-all duration-300"
+        >
+          Download CV
+        </a>
+      </div>
     </div>
 
-    <script>
-        const popupButton = document.getElementById('popupButton');
-        const popup = document.getElementById('popup');
-        const closePopup = document.getElementById('closePopup');
+    <!-- About Section -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-3">About Me</h2>
+      <p class="leading-relaxed">
+        Hello! I’m a passionate Computer Science student currently pursuing my B.Tech. 
+        I love to explore new technologies, build web applications, and solve real-world problems using code. 
+        I enjoy learning about machine learning, software development, and open-source contributions.
+      </p>
+    </div>
 
-        popupButton.addEventListener('click', () => {
-            popup.classList.remove('popup-hidden');
-            popup.classList.add('popup-visible');
-        });
+    <!-- Education -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-3">Education</h2>
+      <ul class="list-disc list-inside">
+        <li>B.Tech in Computer Science Engineering - AKTU University (2022 - 2026)</li>
+        <li>Senior Secondary - U.P. Board (2020 - 2022)</li>
+      </ul>
+    </div>
 
-        closePopup.addEventListener('click', () => {
-            popup.classList.remove('popup-visible');
-            popup.classList.add('popup-hidden');
-        });
-    </script>
+    <!-- Skills -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-3">Skills</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <span class="bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-100 px-3 py-1 rounded">HTML</span>
+        <span class="bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-100 px-3 py-1 rounded">CSS</span>
+        <span class="bg-yellow-100 dark:bg-yellow-700 text-yellow-800 dark:text-yellow-100 px-3 py-1 rounded">JavaScript</span>
+        <span class="bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-100 px-3 py-1 rounded">Python</span>
+        <span class="bg-red-100 dark:bg-red-800 text-red-700 dark:text-red-100 px-3 py-1 rounded">C++</span>
+        <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-700 dark:text-indigo-100 px-3 py-1 rounded">Tailwind CSS</span>
+      </div>
+    </div>
+
+    <!-- Interests -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-3">Interests</h2>
+      <p class="leading-relaxed">
+        I’m deeply interested in Web Development, Competitive Programming, and AI/ML. 
+        I also enjoy blogging and participating in hackathons and tech fests.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
+      &copy; 2025 Raj Yadav. All rights reserved.
+    </div>
+  </div>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    const toggleBtn = document.getElementById('toggleDark');
+    const htmlEl = document.documentElement;
+
+    toggleBtn.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+    });
+  </script>
+
 </body>
 </html>
