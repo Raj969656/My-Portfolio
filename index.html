@@ -37,16 +37,34 @@
         background-color: #23b9eb;
       }
     </style>
+ 
+
+      <script>
+  function scrollToSection() {
+    document.getElementById("target-section").scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+
+      <script>
+  function scrollToSection() {
+    document.getElementById("target-section2").scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+  
+
+
+
     <script src="./matter.js" defer></script>
   </head>
-  <body class="bg-[#111] text-white font-['Nunito']">
+  <body class=" m-0 p-0  bg-[#111] text-white font-['Nunito']">
     <section class="flex flex-col justify-between h-screen">
       <header
         class="z-10 pointer-events-none flex items-center justify-between w-full px-4 mt-4 max-w-screen-xl mx-auto"
       >
  
 
-        <svg xmlns="http://www.w3.org/2000/svg" height="70" width="70" viewBox="0 0 320 512"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#207ec5" d="M32 32C14.3 32 0 46.3 0 64L0 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 95.3 0 102.4 146.4c10.1 14.5 30.1 18 44.6 7.9s18-30.1 7.9-44.6L230.1 309.5C282.8 288.1 320 236.4 320 176 320 96.5 255.5 32 176 32L32 32zM176 256l-112 0 0-160 112 0c44.2 0 80 35.8 80 80s-35.8 80-80 80z"/></svg>
+         <img src="assets/images/android-chrome-192x192.png"  bg-[#111] height="70" width="70" viewBox="0 0 320 512"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#207ec5" d="M32 32C14.3 32 0 46.3 0 64L0 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 95.3 0 102.4 146.4c10.1 14.5 30.1 18 44.6 7.9s18-30.1 7.9-44.6L230.1 309.5C282.8 288.1 320 236.4 320 176 320 96.5 255.5 32 176 32L32 32zM176 256l-112 0 0-160 112 0c44.2 0 80 35.8 80 80s-35.8 80-80 80z"/></svg>
 
         <div class="flex gap-4 pointer-events-auto">
         
@@ -62,6 +80,10 @@
             stroke-linejoin="round"
             class="hidden"
           >
+
+
+
+
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
           <a href="tel:9696561809"
@@ -162,7 +184,9 @@
               FULL Stack Developer
             </p>
  
-  <button 
+ <a href="about.html">
+
+ <button onclick="scrollToSection()"
               class="bg-[#4595eb] py-2 px-5 rounded font-extrabold bg-gradient-to-l from-[#1595b6] to-[#1f2667e6] relative hover:scale-110 ease-in-out duration-100 group"
             >
               About Me
@@ -208,6 +232,11 @@
                 </g>
               </svg>
             </button>
+
+
+
+
+ </a>
           </div>
         </div>
 
@@ -290,7 +319,7 @@
       <div
         class="relative self-center after:content-[''] after:absolute after:w-[2px] after:h-5 after:bg-[#444] after:left-1/2 after:-translate-x-1/2 after:top-[100px]"
       >
-        <button
+        <button onclick="scrollToSection()"
           class="bg-[#4595eb] py-2 px-5 rounded font-extrabold bg-gradient-to-l from-[#1595b6] to-[#1f2667e6] relative hover:scale-110 ease-in-out duration-100 group mb-20"
         >
           Latest Project
@@ -336,12 +365,13 @@
         </button>
       </div>
     </section>
-    <section class="max-w-screen-xl mx-auto px-4 relative pb-8 sm:pb-16">
+    <section  id="target-section2" style="margin-top:2px" class="max-w-screen-xl mx-auto px-4 relative pb-8 sm:pb-16">
       <h2
         class="text-3xl sm:text-[40px] bg-[#111] relative z-10 font-bold px-4 py-2 w-max mx-auto text-center text-[#1788ae] sm:border-b-2 border-[#1788ae]"
       >
          Projects
       </h2>
+    
       <div
         class="flex flex-col sm:flex-row gap-4 mt-8 sm:gap-[80px] items-center sm:mt-20 relative"
       >
@@ -352,15 +382,15 @@
           class="w-4 h-4 rounded-full border-[3px] border-[#459bd5] absolute left-1/2 -translate-x-1/2 bg-[#111] z-10 hover:scale-110 ease-in-out duration-100 hidden sm:block"
         ></div>
         <a
-          href="https://github.com/Raj969656/MyPortfolio"
+          href="#"
           class="flex w-full relative justify-center sm:justify-start"
         >
           <div
             class="flex flex-col items-center relative group sm:hover:scale-105 ease-in-out duration-200"
           >
             <img
-              class="max-w-[400px] w-full mr-auto relative z-10 drop-shadow-[0_0px_60px_rgba(59,130,246,0.6)]"
-              src="https://github.com/Raj969656/MyPortfolio/"
+              class=" rounded-full max-w-[70px] w-full mr-auto relative z-10 drop-shadow-[0_0px_60px_rgba(59,130,246,0.6)]"
+              src="assets/images/bg7.jpg"
               alt=""
             />
             <span
@@ -388,12 +418,12 @@
           </div>
         </a>
 
-        <div class="w-full">
+          <div class="w-full">
           <h3 class="text-[#459bd5] font-bold text-2xl md:text-4xl">
             Mr__
           </h3>
           <span class="text-[#459bd5] text-base md:text-lg"
-            >(Commerical Platform)</span
+            >(About_Me)</span
           >
           <p class="text-justify text-sm md:text-base mt-2">
             Deeply understand advanced concepts, practice with real-world
@@ -450,6 +480,8 @@
           </ul>
         </div>
       </div>
+      
+
 
       <div
         class="flex flex-col sm:flex-row gap-4 mt-12 sm:gap-[80px] items-center sm:mt-20 relative"
@@ -887,7 +919,7 @@
    
 
 
-    <section class="max-w-screen-xl mx-auto px-4 pb-12">
+    <section id="target-section" style="margin-top:1px" class="max-w-screen-xl mx-auto px-4 pb-12">
       <h2
         class="text-3xl sm:text-[40px] bg-[#111] relative z-10 font-bold px-4 py-2 w-max mx-auto text-center text-[#1788ae] sm:border-2 border-[#1788ae] rounded-md"
       >
@@ -985,13 +1017,13 @@
       </div>
     </section>
     <footer class="flex flex-col items-center pb-10">
-      <p class="text-xs text-gray-300">Raj Yadav © 2025</p>
+      <p class="text-xs text-gray-300"> Made with ❤️ by Raj Yadav © 2025</p>
       <div class="black-logo my-4">
         <!--lower logo start here-->
 
 
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="70" width="70" viewBox="0 0 320 512"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#207ec5" d="M32 32C14.3 32 0 46.3 0 64L0 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 95.3 0 102.4 146.4c10.1 14.5 30.1 18 44.6 7.9s18-30.1 7.9-44.6L230.1 309.5C282.8 288.1 320 236.4 320 176 320 96.5 255.5 32 176 32L32 32zM176 256l-112 0 0-160 112 0c44.2 0 80 35.8 80 80s-35.8 80-80 80z"/></svg>
+  <a href="https://www.linkedin.com/in/raj-yadav-5b343128a/"><svg xmlns="http://www.w3.org/2000/svg" height="70" width="70" viewBox="0 0 320 512"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#207ec5" d="M32 32C14.3 32 0 46.3 0 64L0 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 95.3 0 102.4 146.4c10.1 14.5 30.1 18 44.6 7.9s18-30.1 7.9-44.6L230.1 309.5C282.8 288.1 320 236.4 320 176 320 96.5 255.5 32 176 32L32 32zM176 256l-112 0 0-160 112 0c44.2 0 80 35.8 80 80s-35.8 80-80 80z"/></svg></a>
 
 
 
