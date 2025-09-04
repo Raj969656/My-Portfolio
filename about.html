@@ -6,7 +6,6 @@
   <title>About Me - CS Student</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Enable dark mode using class strategy
     tailwind.config = {
       darkMode: 'class'
     };
@@ -29,37 +28,30 @@
   </script>
 
 
-
 </head>
-<body class="bg-slate-400 text-black transition-colors duration-300 dark:bg-gray-900 dark:text-white">
+<body class="bg-slate-400 text-black transition-colors duration-300 dark:bg-gray-900 dark:text-white ">
 <div class="flex justify-end p-6" style="text-align: right;">
         <button  id="darkModeToggle"
       class="flex items-center gap-2 bg-gray-800 text-white dark:bg-yellow-400 dark:text-black px-4 py-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300"
       onclick="toggleDarkMode()">
-           Dark Mode
+          🌙 Dark Mode
         </button>
 
 </div>
-  <!-- Main Container -->
-  <div class=" max-w-4xl mx-auto p-6 mt-10 bg-slate-100 dark:bg-gray-800 shadow-lg rounded-lg">
+  <div class=" max-w-4xl mx-auto p-6 mt-2 bg-slate-100 dark:bg-gray-800 shadow-lg rounded-lg">
 
     <!-- Header -->
     <div class="flex flex-col items-center text-center">
       <img aria-placeholder="bg7.jpg"
-        src="./assets/images/bg7.jpg"
+        src="bg7.jpg"
         alt="" 
         class="w-32 h-32 rounded-full border-4 border-blue-500"
       />
       <h1 class="text-3xl font-bold mt-4">Raj Yadav</h1>
       <p class="text-blue-600 dark:text-blue-400">Computer Science Engineering Student</p>
-
-      <!-- Buttons -->
       <div class="mt-4 flex gap-4">
-        <!-- Dark Mode Toggle -->
-       
-        <!-- Download CV -->
         <a 
-          href="./assets/images/Rresume.pdf" 
+          href="Rresume.pdf" 
           download 
           class="bg-blue-600 text-white px-4 py-2 rounded hover:scale-105 active:scale-95 transition-all duration-300"
         >
@@ -67,8 +59,6 @@
         </a>
       </div>
     </div>
-
-    <!-- About Section -->
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-3">About Me</h2>
       <p class="leading-relaxed">
@@ -77,8 +67,6 @@
         I enjoy learning about machine learning, software development, and open-source contributions.
       </p>
     </div>
-
-    <!-- Education -->
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-3">Education</h2>
       <ul class="list-disc list-inside">
@@ -86,8 +74,6 @@
         <li>Senior Secondary - U.P. Board (2020 - 2022)</li>
       </ul>
     </div>
-
-    <!-- Skills -->
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-3">Skills</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -99,8 +85,6 @@
         <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-700 dark:text-indigo-100 px-3 py-1 rounded">Tailwind CSS</span>
       </div>
     </div>
-
-    <!-- Interests -->
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-3">Interests</h2>
       <p class="leading-relaxed">
@@ -108,14 +92,10 @@
         I also enjoy blogging and participating in hackathons and tech fests.
       </p>
     </div>
-
-    <!-- Footer -->
     <div class="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
       &copy; 2025 Raj Yadav. All rights reserved.
     </div>
   </div>
-
-  <!-- Dark Mode Toggle Script -->
   <script>
     const toggleBtn = document.getElementById('toggleDark');
     const htmlEl = document.documentElement;
@@ -127,3 +107,4 @@
 
 </body>
 </html>
+
