@@ -176,4 +176,27 @@ footer {
 /* dark mode tuning */
 .dark .about-btn {
   background: linear-gradient(135deg, #38bdf8, #2563eb);
+}/* ================= HEADER LOGO ================= */
+
+.logo-link {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* dot accent */
+.logo-text span {
+  color: #ef4444; /* red accent */
+}
+
+/* hover effect */
+.logo-link:hover .logo-text {
+  color: #ef4444;
+  text-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
 }
