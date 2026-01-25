@@ -1,76 +1,118 @@
-var canvas = document.querySelector("#wrapper-canvas");
+/* ===================== MATTER.JS BACKGROUND – FINAL RESPONSIVE VERSION ===================== */
 
+/* Wrapper */
+var canvasWrapper = document.querySelector("#wrapper-canvas");
+
+/* Mobile detection */
+var isMobile =
+  /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+    navigator.userAgent
+  );
+
+/* Viewport dimensions (ALWAYS viewport, never scrollHeight) */
 var dimensions = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
 
+/* Plugins */
 Matter.use("matter-attractors");
 Matter.use("matter-wrap");
 
 function runMatter() {
-  // module aliases
+  /* Module aliases */
   var Engine = Matter.Engine,
     Events = Matter.Events,
     Runner = Matter.Runner,
     Render = Matter.Render,
     World = Matter.World,
     Body = Matter.Body,
-    Mouse = Matter.Mouse,
     Common = Matter.Common,
-    Composite = Matter.Composite,
-    Composites = Matter.Composites,
     Bodies = Matter.Bodies;
 
-  // create engine
+  /* ===================== ENGINE ===================== */
   var engine = Engine.create();
 
-  engine.world.gravity.y = 0;
-  engine.world.gravity.x = 0;
-  engine.world.gravity.scale = 0.1;
+  /* Stability tuning */
+  engine.positionIterations = isMobile ? 4 : 6;
+  engine.velocityIterations = isMobile ? 3 : 4;
 
-  // create renderer
+  engine.world.gravity.x = 0;
+  engine.world.gravity.y = 0;
+  engine.world.gravity.scale = 0;
+
+  /* ===================== RENDERER ===================== */
   var render = Render.create({
-    element: canvas,
+    element: canvasWrapper,
     engine: engine,
     options: {
-      showVelocity: false,
       width: dimensions.width,
       height: dimensions.height,
       wireframes: false,
       background: "transparent",
+      pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
     },
   });
 
-  // create runner
+  /* ===================== RUNNER ===================== */
   var runner = Runner.create();
 
-  // Runner.run(runner, engine);
-  // Render.run(render);
-
-  // create demo scene
+  /* ===================== WORLD ===================== */
   var world = engine.world;
-  world.gravity.scale = 0;
 
-  // create a body with an attractor
-  var attractiveBody = Bodies.circle(
-    render.options.width / 2,
-    render.options.height / 2,
-    Math.max(dimensions.width / 25, dimensions.height / 25) / 2,
+  /* ===================== WALLS (VIEWPORT SAFE) ===================== */
+  var wallThickness = 120;
+
+  var walls = [
+    Bodies.rectangle(
+      dimensions.width / 2,
+      -wallThickness,
+      dimensions.width,
+      wallThickness,
+      { isStatic: true }
+    ),
+    Bodies.rectangle(
+      dimensions.width / 2,
+      dimensions.height + wallThickness,
+      dimensions.width,
+      wallThickness,
+      { isStatic: true }
+    ),
+    Bodies.rectangle(
+      -wallThickness,
+      dimensions.height / 2,
+      wallThickness,
+      dimensions.height,
+      { isStatic: true }
+    ),
+    Bodies.rectangle(
+      dimensions.width + wallThickness,
+      dimensions.height / 2,
+      wallThickness,
+      dimensions.height,
+      { isStatic: true }
+    ),
+  ];
+
+  World.add(world, walls);
+
+  /* ===================== ATTRACTOR ===================== */
+  var attractor = Bodies.circle(
+    dimensions.width / 2,
+    dimensions.height / 2,
+    Math.min(dimensions.width, dimensions.height) / 18,
     {
-      render: {
-        fillStyle: `#000`,
-        strokeStyle: `#000`,
-        lineWidth: 0,
-      },
-
       isStatic: true,
+      render: {
+        fillStyle: "#000000",
+      },
       plugin: {
         attractors: [
           function (bodyA, bodyB) {
+            var strength = isMobile ? 0.000001 : 0.000002;
             return {
-              x: (bodyA.position.x - bodyB.position.x) * 1e-6,
-              y: (bodyA.position.y - bodyB.position.y) * 1e-6,
+              x: (bodyA.position.x - bodyB.position.x) * strength,
+              y: (bodyA.position.y - bodyB.position.y) * strength,
             };
           },
         ],
@@ -78,136 +120,99 @@ function runMatter() {
     }
   );
 
-  World.add(world, attractiveBody);
+  World.add(world, attractor);
 
-  // add some bodies that to be attracted
-  for (var i = 0; i < 60; i += 1) {
-    let x = Common.random(0, render.options.width);
-    let y = Common.random(0, render.options.height);
-    let s =
-      Common.random() > 0.6 ? Common.random(10, 80) : Common.random(4, 60);
-    let poligonNumber = Common.random(3, 6);
-    var body = Bodies.polygon(
-      x,
-      y,
-      poligonNumber,
-      s,
+  /* ===================== PARTICLES ===================== */
+  var PARTICLE_COUNT = isMobile ? 20 : 60;
 
-      {
-        mass: s / 20,
-        friction: 0,
-        frictionAir: 0.02,
-        angle: Math.round(Math.random() * 360),
-        render: {
-          fillStyle: "#222222",
-          strokeStyle: `#000000`,
-          lineWidth: 2,
-        },
-      }
-    );
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
+    var x = Common.random(0, dimensions.width);
+    var y = Common.random(0, dimensions.height);
 
-    World.add(world, body);
+    var size = Common.random(6, 40);
+    var sides = Common.random(3, 6);
 
-    let r = Common.random(0, 1);
-    var circle = Bodies.circle(x, y, Common.random(2, 8), {
-      mass: 0.1,
-      friction: 0,
-      frictionAir: 0.01,
+    var poly = Bodies.polygon(x, y, sides, size, {
+      mass: size / 25,
+      frictionAir: isMobile ? 0.06 : 0.04,
       render: {
-        fillStyle: r > 0.3 ? `#27292d` : `#444444`,
-        strokeStyle: `#000000`,
+        fillStyle: "#222222",
+        strokeStyle: "#000000",
         lineWidth: 2,
       },
     });
 
-    World.add(world, circle);
-
-    var circle = Bodies.circle(x, y, Common.random(2, 20), {
-      mass: 6,
-      friction: 0,
-      frictionAir: 0,
+    var circleSmall = Bodies.circle(x, y, Common.random(2, 8), {
+      mass: 0.1,
+      frictionAir: isMobile ? 0.05 : 0.03,
       render: {
-        fillStyle: r > 0.3 ? `#334443` : `#222222`,
-        strokeStyle: `#111111`,
-        lineWidth: 4,
+        fillStyle: "#444444",
+        strokeStyle: "#000000",
+        lineWidth: 1,
       },
     });
 
-    World.add(world, circle);
-
-    var circle = Bodies.circle(x, y, Common.random(2, 30), {
-      mass: 0.2,
-      friction: 0.6,
-      frictionAir: 0.8,
+    var circleMedium = Bodies.circle(x, y, Common.random(6, 14), {
+      mass: 0.3,
+      frictionAir: isMobile ? 0.04 : 0.02,
       render: {
-        fillStyle: `#191919`,
-        strokeStyle: `#111111`,
-        lineWidth: 3,
+        fillStyle: "#333333",
+        strokeStyle: "#111111",
+        lineWidth: 2,
       },
     });
 
-    World.add(world, circle);
+    World.add(world, [poly, circleSmall, circleMedium]);
   }
 
-  // add mouse control
-  var mouse = Mouse.create(render.canvas);
+  /* ===================== POINTER FOLLOW (MOUSE + TOUCH SAFE) ===================== */
+  var pointer = {
+    x: dimensions.width / 2,
+    y: dimensions.height / 2,
+  };
+
+  window.addEventListener("mousemove", function (e) {
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+  });
+
+  window.addEventListener(
+    "touchmove",
+    function (e) {
+      if (e.touches && e.touches.length > 0) {
+        pointer.x = e.touches[0].clientX;
+        pointer.y = e.touches[0].clientY;
+      }
+    },
+    { passive: true }
+  );
 
   Events.on(engine, "afterUpdate", function () {
-    if (!mouse.position.x) return;
-    // smoothly move the attractor body towards the mouse
-    Body.translate(attractiveBody, {
-      x: (mouse.position.x - attractiveBody.position.x) * 0.12,
-      y: (mouse.position.y - attractiveBody.position.y) * 0.12,
+    Body.translate(attractor, {
+      x: (pointer.x - attractor.position.x) * 0.15,
+      y: (pointer.y - attractor.position.y) * 0.15,
     });
   });
 
-  // return a context for MatterDemo to control
-  let data = {
-    engine: engine,
-    runner: runner,
-    render: render,
-    canvas: render.canvas,
-    stop: function () {
-      Matter.Render.stop(render);
-      Matter.Runner.stop(runner);
-    },
-    play: function () {
-      Matter.Runner.run(runner, engine);
-      Matter.Render.run(render);
-    },
-  };
+  /* ===================== START ===================== */
+  Runner.run(runner, engine);
+  Render.run(render);
 
-  Matter.Runner.run(runner, engine);
-  Matter.Render.run(render);
-  return data;
-}
-
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function () {
-    var context = this,
-      args = arguments;
-    var later = function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
+  return {
+    engine,
+    render,
+    runner,
   };
 }
 
-function setWindowSize() {
-  let dimensions = {};
-  dimensions.width = $(window).width();
-  dimensions.height = $(window).height();
+/* ===================== INIT ===================== */
+var matterInstance = runMatter();
 
-  m.render.canvas.width = $(window).width();
-  m.render.canvas.height = $(window).height();
-  return dimensions;
-}
+/* ===================== RESIZE HANDLING ===================== */
+window.addEventListener("resize", function () {
+  dimensions.width = window.innerWidth;
+  dimensions.height = window.innerHeight;
 
-let m = runMatter();
-setWindowSize();
-$(window).resize(debounce(setWindowSize, 250));
+  matterInstance.render.canvas.width = dimensions.width;
+  matterInstance.render.canvas.height = dimensions.height;
+});
